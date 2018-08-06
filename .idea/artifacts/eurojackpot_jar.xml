@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="eurojackpot:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/eurojackpot_jar</output-path>
+    <root id="archive" name="eurojackpot.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="E:/wdp/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="eurojackpot" />
+    </root>
+  </artifact>
+</component>
