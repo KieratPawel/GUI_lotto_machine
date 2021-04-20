@@ -7,29 +7,29 @@ import static java.lang.Math.random;
  * Created by Znakomity on 2017-09-13.
  */
 public class Lotto {
-    private int liczba_losowanych;
-    private int liczba_liczb;
+    private int drawRange;
+    private int entireRange;
     private int[] tab;
 
     private ArrayList<Integer> List;
 
 
-    public Lotto(int liczba_liczb_ogólna, int liczba_losowanych) {
-        liczba_liczb = liczba_liczb_ogólna;
-        this.liczba_losowanych = liczba_losowanych;
-        tab = new int[liczba_losowanych];
+    public Lotto(int generalEntireRange, int drawRange) {
+        entireRange = generalEntireRange;
+        this.drawRange = drawRange;
+        tab = new int[drawRange];
     }
 
     public Lotto() {
         this(50, 5);
     }
 
-    public static int losuj(int zakres_do) {
-        int zwrot = (int) (random() * zakres_do + 1);
-        return zwrot;
+    public static int draw(int rangeTo) {
+        int result = (int) (random() * rangeTo + 1);
+        return result;
     }
 
-    public String wyświetl() {
+    public String display() {
         Arrays.sort(tab);
         String result="";
         for(int i=0;i<tab.length;i++)
@@ -40,16 +40,16 @@ public class Lotto {
     }
 
 
-    public void mechanizm2() {
-        List=new ArrayList<Integer>(liczba_liczb);
-        for(int i=0;i<liczba_liczb;i++){
+    public void drawNumbers() {
+        List=new ArrayList<Integer>(entireRange);
+        for(int i=0;i<entireRange;i++){
             List.add(i,i+1);
         }
-        for(int i=0;i<liczba_losowanych;i++){
-            int los=losuj(liczba_liczb)-1;
+        for(int i=0;i<drawRange;i++){
+            int los=draw(entireRange)-1;
             tab[i]=List.get(los);
             List.remove(los);
-            liczba_liczb--;
+            entireRange--;
         }
     }
 }

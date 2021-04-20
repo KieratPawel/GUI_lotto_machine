@@ -10,10 +10,10 @@ import javax.imageio.ImageIO;
  * Created by Znakomity on 2017-10-01.
  */
 public class GUI extends JFrame implements ActionListener {
-    private int liczbaLosowanych, zakres;
-    private JButton bLosuj;
-    private JLabel lLiczbalosowanych, lZakres, lTwojeLiczbyTo, lWylosowane;
-    private JTextField tZakres, tLiczbaLosowanych;
+    private int drawRange, drawNumbers;
+    private JButton buttonDraw;
+    private JLabel labelDrawNumbers, labelDrawRange, labelYourNumbers, labelDrawn;
+    private JTextField textDrawRange, textDrawNumbers;
 
     public GUI() {
         setTitle("Lotto Machine");
@@ -22,7 +22,7 @@ public class GUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         try {
-            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("test.jpg")))));
+            setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("background.jpg")))));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -30,35 +30,35 @@ public class GUI extends JFrame implements ActionListener {
         ImageIcon img = new ImageIcon("icon.png");
         setIconImage(img.getImage());
 
-        lZakres = new JLabel("Wprowad≈∫ zakres:");
-        lZakres.setBounds(50, 50, 200, 25);
-        add(lZakres);
+        labelDrawRange = new JLabel("Wprowadü zakres:");
+        labelDrawRange.setBounds(50, 50, 200, 25);
+        add(labelDrawRange);
 
-        lLiczbalosowanych = new JLabel("Wprowad≈∫ liczbƒô losowanych liczb:");
-        lLiczbalosowanych.setBounds(50, 100, 200, 25);
-        add(lLiczbalosowanych);
+        labelDrawNumbers = new JLabel("Wprowadü liczbÍ losowanych liczb:");
+        labelDrawNumbers.setBounds(50, 100, 200, 25);
+        add(labelDrawNumbers);
 
-        tZakres = new JTextField("");
-        tZakres.setBounds(300, 50, 90, 25);
-        add(tZakres);
+        textDrawRange = new JTextField("");
+        textDrawRange.setBounds(300, 50, 90, 25);
+        add(textDrawRange);
 
-        tLiczbaLosowanych = new JTextField("");
-        tLiczbaLosowanych.setBounds(300, 100, 90, 25);
-        add(tLiczbaLosowanych);
+        textDrawNumbers = new JTextField("");
+        textDrawNumbers.setBounds(300, 100, 90, 25);
+        add(textDrawNumbers);
 
-        lTwojeLiczbyTo = new JLabel("Twoje liczby to:");
-        lTwojeLiczbyTo.setBounds(50, 220, 200, 25);
-        add(lTwojeLiczbyTo);
+        labelYourNumbers = new JLabel("Twoje liczby to:");
+        labelYourNumbers.setBounds(50, 220, 200, 25);
+        add(labelYourNumbers);
 
-        lWylosowane = new JLabel();
-        lWylosowane.setBounds(150, 220, 250, 25);
-        lWylosowane.setFont(new Font("Veranda", Font.BOLD, 13));
-        add(lWylosowane);
+        labelDrawn = new JLabel();
+        labelDrawn.setBounds(150, 220, 250, 25);
+        labelDrawn.setFont(new Font("Veranda", Font.BOLD, 13));
+        add(labelDrawn);
 
-        bLosuj = new JButton("Losuj");
-        bLosuj.setBounds(150, 150, 180, 50);
-        bLosuj.addActionListener(this);
-        add(bLosuj);
+        buttonDraw = new JButton("Losuj");
+        buttonDraw.setBounds(150, 150, 180, 50);
+        buttonDraw.addActionListener(this);
+        add(buttonDraw);
 
         setVisible(true);
     }
@@ -67,22 +67,22 @@ public class GUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source == bLosuj) {
+        if (source == buttonDraw) {
             try {
-                liczbaLosowanych = Integer.parseInt(tLiczbaLosowanych.getText());
-                zakres = Integer.parseInt(tZakres.getText());
-                if (liczbaLosowanych > zakres) {
-                    lWylosowane.setForeground(Color.RED);
-                    lWylosowane.setText("Liczba losowanych przewy≈ºsza zakres!");
+                drawRange = Integer.parseInt(textDrawNumbers.getText());
+                drawNumbers = Integer.parseInt(textDrawRange.getText());
+                if (drawRange > drawNumbers) {
+                    labelDrawn.setForeground(Color.RED);
+                    labelDrawn.setText("Liczba losowanych przewyøsza zakres!");
                 } else {
-                    Lotto lotto = new Lotto(zakres, liczbaLosowanych);
-                    lotto.mechanizm2();
-                    lWylosowane.setText(lotto.wy≈õwietl());
-                    lWylosowane.setForeground(Color.BLUE);
+                    Lotto lotto = new Lotto(drawNumbers, drawRange);
+                    lotto.drawNumbers();
+                    labelDrawn.setText(lotto.display());
+                    labelDrawn.setForeground(Color.BLUE);
                 }
             } catch (Exception ex) {
-                lWylosowane.setForeground(Color.RED);
-                lWylosowane.setText("Wprowad≈∫ poprawnie liczby!");
+                labelDrawn.setForeground(Color.RED);
+                labelDrawn.setText("Wprowadü poprawnie liczby!");
             }
         }
     }
